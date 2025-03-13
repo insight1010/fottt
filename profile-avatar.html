@@ -1,0 +1,995 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>FitChallenge - Профиль</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #4A90E2;
+            --primary-dark: #3A7BC8;
+            --secondary-color: #FF6B6B;
+            --success-color: #6BCB77;
+            --warning-color: #FFD93D;
+            --danger-color: #F87474;
+            --light-color: #F8F9FA;
+            --dark-color: #343A40;
+            --gray-100: #F8F9FA;
+            --gray-200: #E9ECEF;
+            --gray-300: #DEE2E6;
+            --gray-400: #CED4DA;
+            --gray-500: #ADB5BD;
+            --gray-600: #6C757D;
+            --gray-700: #495057;
+            --gray-800: #343A40;
+            --gray-900: #212529;
+            --font-family: 'Montserrat', sans-serif;
+            --border-radius: 12px;
+            --box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            font-family: var(--font-family);
+            font-size: 16px;
+            line-height: 1.5;
+            color: var(--gray-800);
+            background-color: #2C3E50;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            overflow-x: hidden;
+            height: 100%;
+            width: 100%;
+        }
+
+        .app-container {
+            position: relative;
+            max-width: 480px;
+            height: 100%;
+            margin: 0 auto;
+            background-color: #2C3E50;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            box-shadow: var(--box-shadow);
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px;
+            background-color: #34495E;
+            color: white;
+            position: relative;
+            z-index: 10;
+        }
+
+        .header h1 {
+            font-size: 1.25rem;
+            font-weight: 600;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 12px;
+        }
+
+        .btn-icon {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            color: white;
+            background-color: rgba(255, 255, 255, 0.1);
+            border: none;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .btn-icon:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .main-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow: hidden;
+            padding-bottom: 70px; /* Space for tab bar */
+        }
+
+        .avatar-section {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 60%;
+            overflow: hidden;
+        }
+
+        .avatar-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .avatar-aura {
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(74, 144, 226, 0.3) 0%, rgba(74, 144, 226, 0) 70%);
+            animation: pulse 3s infinite alternate;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(0.95); opacity: 0.7; }
+            100% { transform: scale(1.05); opacity: 0.9; }
+        }
+
+        .avatar-image {
+            position: relative;
+            z-index: 2;
+            height: 90%;
+            object-fit: contain;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .level-badge {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background-color: #4A90E2;
+            color: white;
+            border-radius: 12px;
+            padding: 8px 16px;
+            font-weight: 600;
+            font-size: 1.2rem;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            z-index: 5;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .level-badge:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        .level-badge .level-progress {
+            width: 60px;
+            height: 8px;
+            background-color: rgba(255, 255, 255, 0.3);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .level-badge .level-progress-bar {
+            height: 100%;
+            width: 66%;
+            background-color: white;
+            border-radius: 4px;
+        }
+
+        .stats-section {
+            padding: 20px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            background-color: #34495E;
+            border-top-left-radius: 30px;
+            border-top-right-radius: 30px;
+            margin-top: -30px;
+            position: relative;
+            z-index: 3;
+            box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .stat-card {
+            background-color: #2C3E50;
+            border-radius: 16px;
+            padding: 16px;
+            color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .stat-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transform: translateX(-100%);
+            transition: transform 0.6s ease;
+        }
+
+        .stat-card:hover::after {
+            transform: translateX(100%);
+        }
+
+        .stat-card.primary {
+            grid-column: span 2;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .stat-card h3 {
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--gray-400);
+            margin-bottom: 8px;
+        }
+
+        .stat-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .stat-value i {
+            color: var(--primary-color);
+        }
+
+        .progress-bar {
+            height: 8px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            overflow: hidden;
+            margin-top: 8px;
+        }
+
+        .progress-bar-fill {
+            height: 100%;
+            background-color: var(--primary-color);
+            border-radius: 4px;
+            transition: width 0.5s ease-out;
+        }
+
+        .progress-bar-fill.success {
+            background-color: var(--success-color);
+        }
+
+        .progress-bar-fill.warning {
+            background-color: var(--warning-color);
+        }
+
+        .action-buttons {
+            grid-column: span 2;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-top: 12px;
+        }
+
+        .boost-button {
+            grid-column: span 2;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .boost-button::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 5px;
+            height: 5px;
+            background: rgba(255, 255, 255, 0.5);
+            opacity: 0;
+            border-radius: 100%;
+            transform: scale(1, 1) translate(-50%, -50%);
+            transform-origin: 50% 50%;
+        }
+
+        .boost-button:active::after {
+            opacity: 1;
+            transform: scale(50, 50) translate(-50%, -50%);
+            transition: transform 0.5s, opacity 1s;
+        }
+
+        .action-button {
+            background-color: #4A90E2;
+            color: white;
+            border: none;
+            border-radius: 16px;
+            padding: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .action-button:hover {
+            transform: translateY(-2px);
+        }
+
+        .action-button.success {
+            background-color: #27AE60;
+        }
+
+        .action-button.success:hover {
+            background-color: #219653;
+        }
+
+        .action-button.danger {
+            background-color: #E74C3C;
+        }
+
+        .action-button.danger:hover {
+            background-color: #C0392B;
+        }
+
+        .action-button.warning {
+            background-color: #F1C40F;
+            color: #2C3E50;
+        }
+
+        .action-button.warning:hover {
+            background-color: #F39C12;
+        }
+
+        .action-button::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 5px;
+            height: 5px;
+            background: rgba(255, 255, 255, 0.5);
+            opacity: 0;
+            border-radius: 100%;
+            transform: scale(1, 1) translate(-50%, -50%);
+            transform-origin: 50% 50%;
+        }
+
+        .action-button:active::after {
+            opacity: 1;
+            transform: scale(50, 50) translate(-50%, -50%);
+            transition: transform 0.5s, opacity 1s;
+        }
+
+        .achievements-section {
+            padding: 20px;
+            background-color: #34495E;
+        }
+
+        .section-title {
+            color: white;
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+
+        .achievements-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+        }
+
+        .achievement-item {
+            background-color: #2C3E50;
+            border-radius: 12px;
+            padding: 12px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .achievement-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--primary-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 1.2rem;
+        }
+
+        .achievement-name {
+            font-size: 0.7rem;
+            color: white;
+            text-align: center;
+            font-weight: 500;
+        }
+
+        .achievement-item.locked .achievement-icon {
+            background-color: var(--gray-600);
+            opacity: 0.5;
+        }
+
+        .achievement-item.locked .achievement-name {
+            color: var(--gray-500);
+        }
+
+        .tab-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            max-width: 480px;
+            margin: 0 auto;
+            height: 70px;
+            background-color: #34495E;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            z-index: 100;
+        }
+
+        .tab-bar-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            flex: 1;
+            height: 100%;
+            color: var(--gray-400);
+            transition: var(--transition);
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .tab-bar-item i {
+            font-size: 1.25rem;
+            margin-bottom: 4px;
+        }
+
+        .tab-bar-item span {
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+
+        .tab-bar-item.active {
+            color: var(--primary-color);
+        }
+
+        .tab-bar-item-center {
+            position: relative;
+            top: -15px;
+        }
+
+        .tab-bar-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 3px solid #34495E;
+            box-shadow: var(--box-shadow);
+        }
+
+        .tab-bar-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .currency-badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background-color: #F1C40F;
+            color: #2C3E50;
+            border-radius: 12px;
+            padding: 8px 16px;
+            font-weight: 700;
+            font-size: 1.2rem;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            z-index: 5;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .currency-badge:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        .currency-badge i {
+            color: #E67E22;
+        }
+
+        .belt-badge {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #27AE60;
+            color: white;
+            border-radius: 20px;
+            padding: 6px 16px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            z-index: 5;
+            transition: all 0.3s ease;
+        }
+
+        .belt-badge:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        @media (max-width: 480px) {
+            .app-container {
+                width: 100%;
+                height: 100vh;
+                box-shadow: none;
+            }
+            
+            .avatar-section {
+                height: 45%;
+            }
+            
+            .stats-section {
+                padding: 16px;
+            }
+            
+            .achievements-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            
+            .action-buttons {
+                grid-template-columns: 1fr;
+            }
+            
+            .boost-button, .action-button {
+                padding: 10px;
+                font-size: 0.9rem;
+            }
+            
+            .level-badge, .currency-badge {
+                padding: 6px 12px;
+                font-size: 1rem;
+            }
+            
+            .belt-badge {
+                padding: 4px 12px;
+                font-size: 0.8rem;
+            }
+        }
+
+        @media (prefers-color-scheme: dark) {
+            body {
+                background-color: #1a2639;
+            }
+            
+            .app-container {
+                background-color: #1a2639;
+            }
+            
+            .header {
+                background-color: #2c3e50;
+            }
+            
+            .stats-section {
+                background-color: #2c3e50;
+            }
+            
+            .stat-card {
+                background-color: #1a2639;
+            }
+            
+            .achievements-section {
+                background-color: #2c3e50;
+            }
+            
+            .achievement-item {
+                background-color: #1a2639;
+            }
+            
+            .tab-bar {
+                background-color: #2c3e50;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <div class="header">
+            <h1>Александр</h1>
+            <div class="header-actions">
+                <button class="btn-icon">
+                    <i class="fas fa-cog"></i>
+                </button>
+            </div>
+        </div>
+
+        <div class="main-content">
+            <div class="avatar-section">
+                <div class="level-badge">
+                    <span>Lv. 4</span>
+                    <div class="level-progress">
+                        <div class="level-progress-bar"></div>
+                    </div>
+                </div>
+                
+                <div class="currency-badge">
+                    <i class="fas fa-coins"></i>
+                    <span>1,250</span>
+                </div>
+                
+                <div class="avatar-container">
+                    <div class="avatar-aura"></div>
+                    <img src="img/avatar-fullbody.svg" alt="Аватар пользователя" class="avatar-image">
+                </div>
+                
+                <div class="belt-badge">
+                    Зеленый пояс
+                </div>
+            </div>
+
+            <div class="stats-section">
+                <div class="stat-card primary">
+                    <h3>Вероятность успеха</h3>
+                    <div class="stat-value">
+                        <i class="fas fa-chart-line"></i>
+                        <span>65%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-bar-fill" style="width: 65%;"></div>
+                    </div>
+                </div>
+                
+                <div class="stat-card">
+                    <h3>Энергия</h3>
+                    <div class="stat-value">
+                        <i class="fas fa-bolt"></i>
+                        <span>78/100</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-bar-fill success" style="width: 78%;"></div>
+                    </div>
+                </div>
+                
+                <div class="stat-card">
+                    <h3>Настроение</h3>
+                    <div class="stat-value">
+                        <i class="fas fa-smile"></i>
+                        <span>85/100</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-bar-fill success" style="width: 85%;"></div>
+                    </div>
+                </div>
+                
+                <div class="stat-card">
+                    <h3>Опыт</h3>
+                    <div class="stat-value">
+                        <i class="fas fa-star"></i>
+                        <span>320/800</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-bar-fill warning" style="width: 40%;"></div>
+                    </div>
+                </div>
+                
+                <div class="stat-card">
+                    <h3>Серия выполнений</h3>
+                    <div class="stat-value">
+                        <i class="fas fa-fire"></i>
+                        <span>7 дней</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-bar-fill" style="width: 70%;"></div>
+                    </div>
+                </div>
+                
+                <div class="action-buttons">
+                    <button class="boost-button">
+                        <i class="fas fa-bolt"></i>
+                        <span>Буст</span>
+                    </button>
+                    
+                    <button id="complete-habit-btn" class="action-button success">
+                        <i class="fas fa-check"></i>
+                        <span>Выполнить привычку</span>
+                    </button>
+                    
+                    <button id="skip-habit-btn" class="action-button danger">
+                        <i class="fas fa-times"></i>
+                        <span>Пропустить привычку</span>
+                    </button>
+                    
+                    <button id="add-achievement-btn" class="action-button warning">
+                        <i class="fas fa-trophy"></i>
+                        <span>Получить достижение</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="achievements-section">
+                <h2 class="section-title">Достижения</h2>
+                <div class="achievements-grid">
+                    <div class="achievement-item">
+                        <div class="achievement-icon">
+                            <i class="fas fa-running"></i>
+                        </div>
+                        <span class="achievement-name">Марафонец</span>
+                    </div>
+                    <div class="achievement-item">
+                        <div class="achievement-icon">
+                            <i class="fas fa-fire"></i>
+                        </div>
+                        <span class="achievement-name">Огненная серия</span>
+                    </div>
+                    <div class="achievement-item">
+                        <div class="achievement-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <span class="achievement-name">Командный игрок</span>
+                    </div>
+                    <div class="achievement-item locked">
+                        <div class="achievement-icon">
+                            <i class="fas fa-medal"></i>
+                        </div>
+                        <span class="achievement-name">Чемпион</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <nav class="tab-bar">
+            <button class="tab-bar-item">
+                <i class="fas fa-tasks"></i>
+                <span>Задачи</span>
+            </button>
+            <button class="tab-bar-item">
+                <i class="fas fa-users"></i>
+                <span>Сообщество</span>
+            </button>
+            <button class="tab-bar-item tab-bar-item-center active">
+                <div class="tab-bar-avatar">
+                    <img src="img/avatar-fullbody.svg" alt="Аватар">
+                </div>
+            </button>
+            <button class="tab-bar-item">
+                <i class="fas fa-cog"></i>
+                <span>Настройки</span>
+            </button>
+        </nav>
+    </div>
+
+    <script src="js/fullbody-avatar-controller.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Ждем загрузки SVG
+            const avatarObject = document.querySelector('.avatar-image');
+            let avatarController;
+            
+            // Функция для инициализации контроллера аватара
+            function initAvatarController() {
+                // Получаем доступ к SVG документу
+                const svgDoc = avatarObject.contentDocument;
+                
+                // Устанавливаем ID для корневого элемента SVG
+                const svgElement = svgDoc.querySelector('svg');
+                svgElement.id = 'avatar-svg-element';
+                
+                // Инициализируем контроллер аватара
+                avatarController = new FullbodyAvatarController('avatar-svg-element', {
+                    level: 4,
+                    energy: 78,
+                    mood: 85,
+                    streak: 7,
+                    experience: 320,
+                    maxExperience: 800,
+                    belt: 'green',
+                    name: 'Александр',
+                    coins: 1250
+                });
+                
+                // Обновляем отображение статуса на странице
+                updatePageStatus();
+            }
+            
+            // Если SVG уже загружен
+            if (avatarObject.contentDocument && avatarObject.contentDocument.readyState === 'complete') {
+                initAvatarController();
+            } else {
+                // Ждем загрузки SVG
+                avatarObject.addEventListener('load', initAvatarController);
+            }
+            
+            // Анимация ауры на странице
+            const aura = document.querySelector('.avatar-aura');
+            setInterval(() => {
+                const size = 300 + Math.random() * 20;
+                aura.style.width = `${size}px`;
+                aura.style.height = `${size}px`;
+            }, 2000);
+            
+            // Обработчики для кнопок таб-бара
+            const tabItems = document.querySelectorAll('.tab-bar-item');
+            tabItems.forEach(item => {
+                item.addEventListener('click', () => {
+                    tabItems.forEach(i => i.classList.remove('active'));
+                    item.classList.add('active');
+                });
+            });
+            
+            // Обработчик для кнопки буста
+            const boostButton = document.querySelector('.boost-button');
+            boostButton.addEventListener('click', () => {
+                if (!avatarController) return;
+                
+                // Анимация нажатия
+                boostButton.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    boostButton.style.transform = '';
+                }, 200);
+                
+                // Применяем буст через контроллер аватара
+                avatarController.applyBoost();
+                
+                // Обновляем отображение статуса на странице
+                updatePageStatus();
+                
+                // Эффект свечения ауры на странице
+                aura.style.boxShadow = '0 0 30px rgba(74, 144, 226, 0.7)';
+                setTimeout(() => {
+                    aura.style.boxShadow = '';
+                }, 2000);
+            });
+            
+            // Обработчик для кнопки выполнения привычки
+            document.getElementById('complete-habit-btn').addEventListener('click', () => {
+                if (!avatarController) return;
+                
+                // Анимация нажатия
+                const button = document.getElementById('complete-habit-btn');
+                button.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    button.style.transform = '';
+                }, 200);
+                
+                // Выполняем привычку через контроллер аватара
+                avatarController.handleHabitCompletion({ 
+                    id: 1, 
+                    name: 'Утренняя зарядка' 
+                });
+                
+                // Обновляем отображение статуса на странице
+                updatePageStatus();
+            });
+            
+            // Обработчик для кнопки пропуска привычки
+            document.getElementById('skip-habit-btn').addEventListener('click', () => {
+                if (!avatarController) return;
+                
+                // Анимация нажатия
+                const button = document.getElementById('skip-habit-btn');
+                button.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    button.style.transform = '';
+                }, 200);
+                
+                // Пропускаем привычку через контроллер аватара
+                avatarController.handleHabitSkipped();
+                
+                // Обновляем отображение статуса на странице
+                updatePageStatus();
+            });
+            
+            // Обработчик для кнопки получения достижения
+            document.getElementById('add-achievement-btn').addEventListener('click', () => {
+                if (!avatarController) return;
+                
+                // Анимация нажатия
+                const button = document.getElementById('add-achievement-btn');
+                button.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    button.style.transform = '';
+                }, 200);
+                
+                // Добавляем достижение через контроллер аватара
+                avatarController.addAchievement({ 
+                    id: 1, 
+                    name: 'Первая неделя', 
+                    description: 'Выполняйте привычки 7 дней подряд' 
+                });
+                
+                // Обновляем отображение статуса на странице
+                updatePageStatus();
+            });
+            
+            // Функция обновления статуса на странице
+            function updatePageStatus() {
+                if (!avatarController) return;
+                
+                const state = avatarController.exportState();
+                
+                // Обновляем значения в интерфейсе
+                document.querySelector('.level-badge span').textContent = `Lv. ${state.level}`;
+                document.querySelector('.currency-badge span').textContent = state.coins.toLocaleString();
+                document.querySelector('.belt-badge').textContent = getBeltName(state.belt);
+                
+                // Обновляем прогресс-бары
+                document.querySelector('.stat-card.primary .stat-value span').textContent = `${Math.round(state.experience / state.maxExperience * 100)}%`;
+                document.querySelector('.stat-card.primary .progress-bar-fill').style.width = `${Math.round(state.experience / state.maxExperience * 100)}%`;
+                
+                // Энергия
+                document.querySelector('.stat-card:nth-of-type(2) .stat-value span').textContent = `${state.energy}/100`;
+                document.querySelector('.stat-card:nth-of-type(2) .progress-bar-fill').style.width = `${state.energy}%`;
+                
+                // Настроение
+                document.querySelector('.stat-card:nth-of-type(3) .stat-value span').textContent = `${state.mood}/100`;
+                document.querySelector('.stat-card:nth-of-type(3) .progress-bar-fill').style.width = `${state.mood}%`;
+                
+                // Опыт
+                document.querySelector('.stat-card:nth-of-type(4) .stat-value span').textContent = `${state.experience}/${state.maxExperience}`;
+                document.querySelector('.stat-card:nth-of-type(4) .progress-bar-fill').style.width = `${Math.round(state.experience / state.maxExperience * 100)}%`;
+                
+                // Серия выполнений
+                document.querySelector('.stat-card:nth-of-type(5) .stat-value span').textContent = `${state.streak} дней`;
+                document.querySelector('.stat-card:nth-of-type(5) .progress-bar-fill').style.width = `${Math.min(state.streak * 10, 100)}%`;
+            }
+            
+            // Функция для получения названия пояса на русском
+            function getBeltName(belt) {
+                const beltNames = {
+                    'white': 'Белый пояс',
+                    'yellow': 'Желтый пояс',
+                    'orange': 'Оранжевый пояс',
+                    'green': 'Зеленый пояс',
+                    'blue': 'Синий пояс',
+                    'brown': 'Коричневый пояс',
+                    'black': 'Черный пояс'
+                };
+                
+                return beltNames[belt] || 'Белый пояс';
+            }
+        });
+    </script>
+</body>
+</html> 

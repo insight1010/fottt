@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="description" content="FitChallenge - инновационная платформа для формирования фитнес-привычек и здорового образа жизни">
+    <meta name="theme-color" content="#4A90E2">
+    <title>FitChallenge</title>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/avatar-styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Splash Screen -->
+        <div id="splash-screen" class="screen active">
+            <div class="splash-content">
+                <div class="logo-container">
+                    <h1 class="app-logo">FitChallenge</h1>
+                </div>
+                <div class="loading-indicator">
+                    <div class="loading-bar">
+                        <div class="loading-progress"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tasks Screen -->
+        <div id="tasks-screen" class="screen">
+            <div class="screen-header">
+                <h2>Мои задачи</h2>
+                <div class="header-actions">
+                    <button class="btn-icon" aria-label="Фильтр задач">
+                        <i class="fas fa-filter"></i>
+                    </button>
+                    <button class="btn-icon" aria-label="Добавить задачу">
+                        <i class="fas fa-plus"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div class="screen-content">
+                <div class="tabs-container">
+                    <div class="tabs">
+                        <button class="tab active" data-tab="personal">Персональные</button>
+                        <button class="tab" data-tab="team">Командные</button>
+                    </div>
+                    <div class="subtabs">
+                        <button class="subtab active" data-subtab="current">Текущие</button>
+                        <button class="subtab" data-subtab="completed">Завершенные</button>
+                    </div>
+                </div>
+
+                <div class="tab-content active" id="personal-current">
+                    <!-- Habit Card 1 -->
+                    <div class="habit-card">
+                        <div class="habit-header">
+                            <h3 class="habit-title">Утренняя пробежка</h3>
+                            <div class="habit-probability">
+                                <span class="probability-value">0.21</span>
+                                <span class="probability-label">Вероятность</span>
+                            </div>
+                        </div>
+                        <div class="habit-forecast">
+                            <p>Двигайтесь также, и через 30 дней достигнете цели</p>
+                            <button class="btn-text">Посмотреть прогноз</button>
+                        </div>
+                        <div class="habit-today">
+                            <span>Сегодня:</span>
+                            <label class="checkbox-container">
+                                <input type="checkbox" class="habit-checkbox">
+                                <span class="checkmark"></span>
+                            </label>
+                        </div>
+                        <div class="habit-actions">
+                            <button class="btn-secondary">История</button>
+                            <button class="btn-secondary">Настройки</button>
+                        </div>
+                    </div>
+
+                    <!-- Habit Card 2 -->
+                    <div class="habit-card">
+                        <div class="habit-header">
+                            <h3 class="habit-title">Медитация</h3>
+                            <div class="habit-probability">
+                                <span class="probability-value">0.28</span>
+                                <span class="probability-label">Вероятность</span>
+                            </div>
+                        </div>
+                        <div class="habit-forecast">
+                            <p>Двигайтесь также, и через 45 дней достигнете цели</p>
+                            <button class="btn-text">Посмотреть прогноз</button>
+                        </div>
+                        <div class="habit-today">
+                            <span>Сегодня:</span>
+                            <label class="checkbox-container">
+                                <input type="checkbox" class="habit-checkbox">
+                                <span class="checkmark"></span>
+                            </label>
+                        </div>
+                        <div class="habit-actions">
+                            <button class="btn-secondary">История</button>
+                            <button class="btn-secondary">Настройки</button>
+                        </div>
+                    </div>
+
+                    <!-- Add Habit Button -->
+                    <button class="add-habit-btn">
+                        <i class="fas fa-plus"></i>
+                        <span>Добавить привычку</span>
+                    </button>
+                </div>
+
+                <div class="tab-content" id="personal-completed">
+                    <div class="empty-state">
+                        <i class="fas fa-check-circle"></i>
+                        <p>У вас пока нет завершенных задач</p>
+                    </div>
+                </div>
+
+                <div class="tab-content" id="team-current">
+                    <div class="task-card">
+                        <div class="task-header">
+                            <h3 class="task-title">Похудение</h3>
+                            <span class="task-reward">+1.2% вероятности</span>
+                        </div>
+                        <p class="task-description">Выполните сегодняшнее задание по привычке</p>
+                        <div class="task-actions">
+                            <label class="checkbox-container">
+                                <input type="checkbox" class="task-checkbox">
+                                <span class="checkmark"></span>
+                                <span>Выполнено</span>
+                            </label>
+                            <button class="btn-secondary btn-upload">
+                                <i class="fas fa-camera"></i>
+                                <span>Загрузить фото</span>
+                            </button>
+                        </div>
+                        <div class="task-question">
+                            <p>Насколько сложно было выполнить?</p>
+                            <div class="rating">
+                                <button class="rating-btn" data-rating="1">1</button>
+                                <button class="rating-btn" data-rating="2">2</button>
+                                <button class="rating-btn" data-rating="3">3</button>
+                                <button class="rating-btn" data-rating="4">4</button>
+                                <button class="rating-btn" data-rating="5">5</button>
+                            </div>
+                            <span class="task-bonus">+0.33 балла</span>
+                        </div>
+                    </div>
+
+                    <div class="challenge-card">
+                        <h3 class="challenge-title">Выполните 3 привычки без пропусков</h3>
+                        <span class="challenge-reward">+5000 баллов</span>
+                        <div class="challenge-progress">
+                            <div class="progress-item">
+                                <label class="checkbox-container">
+                                    <input type="checkbox" class="challenge-checkbox">
+                                    <span class="checkmark"></span>
+                                    <span>1</span>
+                                </label>
+                            </div>
+                            <div class="progress-item">
+                                <label class="checkbox-container">
+                                    <input type="checkbox" class="challenge-checkbox">
+                                    <span class="checkmark"></span>
+                                    <span>2</span>
+                                </label>
+                            </div>
+                            <div class="progress-item">
+                                <label class="checkbox-container">
+                                    <input type="checkbox" class="challenge-checkbox">
+                                    <span class="checkmark"></span>
+                                    <span>3</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-content" id="team-completed">
+                    <div class="empty-state">
+                        <i class="fas fa-check-circle"></i>
+                        <p>У вас пока нет завершенных командных задач</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Profile Screen -->
+        <div id="profile-screen" class="screen">
+            <div class="screen-header">
+                <h2>Мой профиль</h2>
+                <div class="header-actions">
+                    <button class="btn-icon" aria-label="Настройки профиля">
+                        <i class="fas fa-cog"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div class="screen-content">
+                <div class="avatar-section">
+                    <div class="badges-container">
+                        <div class="level-badge">
+                            <i class="fas fa-star"></i>
+                            <span>Уровень 5</span>
+                        </div>
+                        <div class="currency-badge">
+                            <i class="fas fa-coins"></i>
+                            <span>250</span>
+                        </div>
+                    </div>
+                    <div class="avatar-container">
+                        <img src="https://i.pinimg.com/736x/6b/d4/74/6bd4745bf510298a11db96f7bb392b2c.jpg" alt="Аватар пользователя" class="avatar-image">
+                    </div>
+                    <div class="belt-badge">
+                        <i class="fas fa-award"></i>
+                        <span>Зеленый пояс</span>
+                    </div>
+                </div>
+
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-title">Вероятность успеха</div>
+                        <div class="stat-value" data-stat="probability"><span>40</span>%</div>
+                        <div class="progress-bar">
+                            <div class="progress" style="width: 40%"></div>
+                            <div class="progress-value">40%</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-title">Энергия</div>
+                        <div class="stat-value" data-stat="energy"><span>78</span>/100</div>
+                        <div class="progress-bar">
+                            <div class="progress" style="width: 78%"></div>
+                            <div class="progress-value">78%</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-title">Настроение</div>
+                        <div class="stat-value" data-stat="mood"><span>85</span>/100</div>
+                        <div class="progress-bar">
+                            <div class="progress" style="width: 85%"></div>
+                            <div class="progress-value">85%</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-title">Серия выполнений</div>
+                        <div class="stat-value" data-stat="streak"><span>7</span> дней</div>
+                        <div class="progress-bar">
+                            <div class="progress" style="width: 70%"></div>
+                            <div class="progress-value">7/10</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="action-buttons">
+                    <button id="boost-btn" class="action-button boost"><i class="fas fa-bolt"></i> Буст</button>
+                    <button id="complete-habit-btn" class="action-button success">Выполнить привычку</button>
+                </div>
+
+                <div class="achievements-container">
+                    <h3 class="section-title">Достижения</h3>
+                    <div class="achievements-grid">
+                        <div class="achievement-item">
+                            <div class="achievement-icon">
+                                <i class="fas fa-running"></i>
+                            </div>
+                            <span class="achievement-name">Марафонец</span>
+                        </div>
+                        <div class="achievement-item">
+                            <div class="achievement-icon">
+                                <i class="fas fa-fire"></i>
+                            </div>
+                            <span class="achievement-name">Огненная серия</span>
+                        </div>
+                        <div class="achievement-item">
+                            <div class="achievement-icon">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <span class="achievement-name">Командный игрок</span>
+                        </div>
+                        <div class="achievement-item locked">
+                            <div class="achievement-icon">
+                                <i class="fas fa-medal"></i>
+                            </div>
+                            <span class="achievement-name">Чемпион</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Community Screen -->
+        <div id="community-screen" class="screen">
+            <div class="screen-header">
+                <h2>Сообщество</h2>
+                <div class="header-actions">
+                    <button class="btn-icon" aria-label="Поиск">
+                        <i class="fas fa-search"></i>
+                    </button>
+                    <button class="btn-icon" aria-label="Создать группу">
+                        <i class="fas fa-plus"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div class="screen-content">
+                <div class="tabs-container">
+                    <div class="tabs">
+                        <button class="tab active" data-tab="groups">Группы</button>
+                        <button class="tab" data-tab="friends">Друзья</button>
+                        <button class="tab" data-tab="feed">Лента</button>
+                    </div>
+                </div>
+
+                <div class="tab-content active" id="groups-content">
+                    <div class="search-container">
+                        <div class="search-input-container">
+                            <i class="fas fa-search search-icon"></i>
+                            <input type="text" class="search-input" placeholder="Найти группу или вызов">
+                        </div>
+                        <button class="btn-secondary">Фильтры</button>
+                    </div>
+
+                    <div class="action-buttons">
+                        <button class="btn-primary">
+                            <i class="fas fa-users"></i>
+                            <span>Создать группу</span>
+                        </button>
+                        <button class="btn-primary">
+                            <i class="fas fa-flag"></i>
+                            <span>Создать вызов</span>
+                        </button>
+                    </div>
+
+                    <h3 class="section-title">Мои группы</h3>
+                    <div class="group-card">
+                        <div class="group-header">
+                            <h4 class="group-name">Медитация</h4>
+                            <div class="group-level">LVL 12 🔼</div>
+                        </div>
+                        <div class="group-members">
+                            <div class="member-avatar">👨‍⚕️</div>
+                            <div class="member-avatar">👩‍🍳</div>
+                            <div class="member-avatar">🧑‍🌾</div>
+                            <div class="member-avatar">👮‍♀️</div>
+                            <div class="member-avatar">🦸</div>
+                            <div class="member-avatar">🦹</div>
+                        </div>
+                        <div class="group-progress">
+                            <p>До следующего уровня: 4,500 баллов</p>
+                            <p>Ваш вклад: 1,500 баллов</p>
+                        </div>
+                        <div class="group-actions">
+                            <button class="btn-secondary">
+                                <i class="fas fa-comments"></i>
+                                <span>Перейти в чат</span>
+                            </button>
+                        </div>
+                        <div class="group-info">
+                            <p>Ваша роль: тайм-кипер</p>
+                            <p>Ритм в группе: Отстающий</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-content" id="friends-content">
+                    <div class="search-container">
+                        <div class="search-input-container">
+                            <i class="fas fa-search search-icon"></i>
+                            <input type="text" class="search-input" placeholder="Найти друзей">
+                        </div>
+                        <button class="btn-secondary">Фильтры</button>
+                    </div>
+
+                    <div class="action-buttons">
+                        <button class="btn-primary">
+                            <i class="fas fa-user-plus"></i>
+                            <span>Добавить друга</span>
+                        </button>
+                        <button class="btn-primary">
+                            <i class="fas fa-share-alt"></i>
+                            <span>Пригласить</span>
+                        </button>
+                    </div>
+
+                    <h3 class="section-title">Мои друзья</h3>
+                    <div class="friend-card">
+                        <div class="friend-avatar">👨‍💼</div>
+                        <div class="friend-info">
+                            <h4 class="friend-name">Сергей Иванов</h4>
+                            <div class="friend-level">LVL 15 Пурпурный пояс</div>
+                            <p class="friend-location">Москва, м. Новокузнецкая</p>
+                            <p class="friend-groups">Общие группы: Медитация</p>
+                        </div>
+                        <button class="btn-icon">
+                            <i class="fab fa-telegram"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="tab-content" id="feed-content">
+                    <div class="feed-post">
+                        <div class="post-header">
+                            <div class="post-avatar">👨‍💼</div>
+                            <div class="post-info">
+                                <h4 class="post-author">Сергей Иванов</h4>
+                                <p class="post-time">2 часа назад</p>
+                            </div>
+                        </div>
+                        <div class="post-content">
+                            <p>Сегодня побил свой рекорд в беге! 5 км за 25 минут 🏃‍♂️</p>
+                            <img src="img/running.jpg" alt="Бег" class="post-image">
+                        </div>
+                        <div class="post-actions">
+                            <button class="btn-icon">
+                                <i class="fas fa-heart"></i>
+                                <span>24</span>
+                            </button>
+                            <button class="btn-icon">
+                                <i class="fas fa-comment"></i>
+                                <span>8</span>
+                            </button>
+                            <button class="btn-icon">
+                                <i class="fas fa-share"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Settings Screen -->
+        <div id="settings-screen" class="screen">
+            <div class="screen-header">
+                <h2>Настройки</h2>
+                <div class="header-actions">
+                    <button class="btn-icon" aria-label="Закрыть">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div class="screen-content">
+                <div class="settings-section">
+                    <h3 class="section-title">Профиль</h3>
+                    <div class="settings-item">
+                        <i class="fas fa-user"></i>
+                        <span>Личные данные</span>
+                        <i class="fas fa-chevron-right"></i>
+                    </div>
+                    <div class="settings-item">
+                        <i class="fas fa-bell"></i>
+                        <span>Уведомления</span>
+                        <i class="fas fa-chevron-right"></i>
+                    </div>
+                    <div class="settings-item">
+                        <i class="fas fa-lock"></i>
+                        <span>Приватность</span>
+                        <i class="fas fa-chevron-right"></i>
+                    </div>
+                </div>
+
+                <div class="settings-section">
+                    <h3 class="section-title">Приложение</h3>
+                    <div class="settings-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Локация</span>
+                        <i class="fas fa-chevron-right"></i>
+                    </div>
+                    <div class="settings-item">
+                        <i class="fas fa-language"></i>
+                        <span>Язык</span>
+                        <i class="fas fa-chevron-right"></i>
+                    </div>
+                    <div class="settings-item">
+                        <i class="fas fa-moon"></i>
+                        <span>Темная тема</span>
+                        <label class="switch">
+                            <input type="checkbox">
+                            <span class="slider round"></span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="settings-section">
+                    <h3 class="section-title">Поддержка</h3>
+                    <div class="settings-item">
+                        <i class="fas fa-question-circle"></i>
+                        <span>Помощь</span>
+                        <i class="fas fa-chevron-right"></i>
+                    </div>
+                    <div class="settings-item">
+                        <i class="fas fa-info-circle"></i>
+                        <span>О приложении</span>
+                        <i class="fas fa-chevron-right"></i>
+                    </div>
+                </div>
+
+                <button class="btn-logout">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Выйти</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Tab Bar Navigation -->
+        <nav class="tab-bar">
+            <button class="tab-bar-item" data-screen="tasks-screen">
+                <i class="fas fa-tasks"></i>
+                <span>Задачи</span>
+            </button>
+            <button class="tab-bar-item" data-screen="community-screen">
+                <i class="fas fa-users"></i>
+                <span>Сообщество</span>
+            </button>
+            <button class="tab-bar-item" data-screen="profile-screen">
+                <i class="fas fa-user"></i>
+                <span>Профиль</span>
+            </button>
+            <button class="tab-bar-item" data-screen="settings-screen">
+                <i class="fas fa-cog"></i>
+                <span>Настройки</span>
+            </button>
+        </nav>
+    </div>
+
+    <script src="js/app.js"></script>
+    <script src="telegram-webapp.js"></script>
+</body>
+</html> 

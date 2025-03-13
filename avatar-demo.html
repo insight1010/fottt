@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FitChallenge - Демонстрация аватара</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            color: #333;
+        }
+        
+        header {
+            background-color: #6A7EFC;
+            color: white;
+            width: 100%;
+            text-align: center;
+            padding: 1rem 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        h1 {
+            margin: 0;
+            font-size: 1.8rem;
+        }
+        
+        .container {
+            max-width: 800px;
+            width: 100%;
+            padding: 2rem;
+            box-sizing: border-box;
+        }
+        
+        .avatar-container {
+            background-color: white;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .avatar-svg {
+            width: 250px;
+            height: 250px;
+            margin-bottom: 1rem;
+        }
+        
+        .controls {
+            background-color: white;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            width: 100%;
+        }
+        
+        .control-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        h2 {
+            color: #6A7EFC;
+            margin-top: 0;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+        
+        .btn-group {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        
+        button {
+            background-color: #6A7EFC;
+            color: white;
+            border: none;
+            border-radius: 50px;
+            padding: 0.8rem 1.5rem;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        button:hover {
+            background-color: #5A6EEC;
+            transform: translateY(-2px);
+        }
+        
+        button:active {
+            transform: translateY(0);
+        }
+        
+        .btn-success {
+            background-color: #4CAF50;
+        }
+        
+        .btn-success:hover {
+            background-color: #3D9C40;
+        }
+        
+        .btn-danger {
+            background-color: #F44336;
+        }
+        
+        .btn-danger:hover {
+            background-color: #E53935;
+        }
+        
+        .btn-warning {
+            background-color: #FFC107;
+        }
+        
+        .btn-warning:hover {
+            background-color: #FFB300;
+        }
+        
+        .slider-container {
+            margin-bottom: 1rem;
+        }
+        
+        .slider-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+        }
+        
+        .slider-label span {
+            font-weight: bold;
+        }
+        
+        input[type="range"] {
+            width: 100%;
+            height: 8px;
+            border-radius: 4px;
+            background: #e0e0e0;
+            outline: none;
+            -webkit-appearance: none;
+        }
+        
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #6A7EFC;
+            cursor: pointer;
+        }
+        
+        .status-display {
+            background-color: #f9f9f9;
+            border-radius: 10px;
+            padding: 1rem;
+            margin-top: 1.5rem;
+        }
+        
+        .status-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+        }
+        
+        .status-item:last-child {
+            margin-bottom: 0;
+        }
+        
+        .status-label {
+            font-weight: bold;
+        }
+        
+        @media (max-width: 600px) {
+            .container {
+                padding: 1rem;
+            }
+            
+            .avatar-container, .controls {
+                padding: 1.5rem;
+            }
+            
+            .btn-group {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+            
+            button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>FitChallenge - Демонстрация аватара</h1>
+    </header>
+    
+    <div class="container">
+        <div class="avatar-container">
+            <object id="avatar-svg" class="avatar-svg" data="img/avatar-template.svg" type="image/svg+xml"></object>
+            <div class="status-display">
+                <div class="status-item">
+                    <span class="status-label">Уровень:</span>
+                    <span id="level-display">5</span>
+                </div>
+                <div class="status-item">
+                    <span class="status-label">Энергия:</span>
+                    <span id="energy-display">70</span>
+                </div>
+                <div class="status-item">
+                    <span class="status-label">Настроение:</span>
+                    <span id="mood-display">80</span>
+                </div>
+                <div class="status-item">
+                    <span class="status-label">Серия выполнений:</span>
+                    <span id="streak-display">7</span>
+                </div>
+                <div class="status-item">
+                    <span class="status-label">Достижения:</span>
+                    <span id="achievements-display">0</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="controls">
+            <div class="control-group">
+                <h2>Действия с привычками</h2>
+                <div class="btn-group">
+                    <button id="complete-habit-btn" class="btn-success">Выполнить привычку</button>
+                    <button id="skip-habit-btn" class="btn-danger">Пропустить привычку</button>
+                    <button id="add-achievement-btn" class="btn-warning">Получить достижение</button>
+                </div>
+            </div>
+            
+            <div class="control-group">
+                <h2>Настройка состояния</h2>
+                
+                <div class="slider-container">
+                    <div class="slider-label">
+                        <label for="energy-slider">Энергия:</label>
+                        <span id="energy-value">70</span>
+                    </div>
+                    <input type="range" id="energy-slider" min="0" max="100" value="70">
+                </div>
+                
+                <div class="slider-container">
+                    <div class="slider-label">
+                        <label for="mood-slider">Настроение:</label>
+                        <span id="mood-value">80</span>
+                    </div>
+                    <input type="range" id="mood-slider" min="0" max="100" value="80">
+                </div>
+                
+                <div class="slider-container">
+                    <div class="slider-label">
+                        <label for="level-slider">Уровень:</label>
+                        <span id="level-value">5</span>
+                    </div>
+                    <input type="range" id="level-slider" min="1" max="30" value="5">
+                </div>
+                
+                <div class="slider-container">
+                    <div class="slider-label">
+                        <label for="streak-slider">Серия выполнений:</label>
+                        <span id="streak-value">7</span>
+                    </div>
+                    <input type="range" id="streak-slider" min="0" max="30" value="7">
+                </div>
+                
+                <button id="apply-state-btn">Применить настройки</button>
+            </div>
+        </div>
+    </div>
+    
+    <script src="js/avatar-controller.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Ждем загрузки SVG
+            const avatarObject = document.getElementById('avatar-svg');
+            let avatarController;
+            
+            avatarObject.addEventListener('load', () => {
+                // Получаем доступ к SVG документу
+                const svgDoc = avatarObject.contentDocument;
+                
+                // Устанавливаем ID для корневого элемента SVG
+                const svgElement = svgDoc.querySelector('svg');
+                svgElement.id = 'avatar-svg-element';
+                
+                // Инициализируем контроллер аватара
+                avatarController = new AvatarController('avatar-svg-element', {
+                    level: 5,
+                    energy: 70,
+                    mood: 80,
+                    streak: 7,
+                    name: 'ФитБадди'
+                });
+                
+                // Обновляем отображение статуса
+                updateStatusDisplay();
+            });
+            
+            // Обработчики событий для кнопок
+            document.getElementById('complete-habit-btn').addEventListener('click', () => {
+                if (avatarController) {
+                    avatarController.handleHabitCompletion({ id: 1, name: 'Утренняя зарядка' });
+                    updateStatusDisplay();
+                }
+            });
+            
+            document.getElementById('skip-habit-btn').addEventListener('click', () => {
+                if (avatarController) {
+                    avatarController.handleHabitSkipped();
+                    updateStatusDisplay();
+                }
+            });
+            
+            document.getElementById('add-achievement-btn').addEventListener('click', () => {
+                if (avatarController) {
+                    avatarController.addAchievement({ 
+                        id: 1, 
+                        name: 'Первая неделя', 
+                        description: 'Выполняйте привычки 7 дней подряд' 
+                    });
+                    updateStatusDisplay();
+                }
+            });
+            
+            // Обработчики для слайдеров
+            document.getElementById('energy-slider').addEventListener('input', (e) => {
+                document.getElementById('energy-value').textContent = e.target.value;
+            });
+            
+            document.getElementById('mood-slider').addEventListener('input', (e) => {
+                document.getElementById('mood-value').textContent = e.target.value;
+            });
+            
+            document.getElementById('level-slider').addEventListener('input', (e) => {
+                document.getElementById('level-value').textContent = e.target.value;
+            });
+            
+            document.getElementById('streak-slider').addEventListener('input', (e) => {
+                document.getElementById('streak-value').textContent = e.target.value;
+            });
+            
+            // Применение настроек
+            document.getElementById('apply-state-btn').addEventListener('click', () => {
+                if (avatarController) {
+                    const newState = {
+                        energy: parseInt(document.getElementById('energy-slider').value),
+                        mood: parseInt(document.getElementById('mood-slider').value),
+                        level: parseInt(document.getElementById('level-slider').value),
+                        streak: parseInt(document.getElementById('streak-slider').value)
+                    };
+                    
+                    avatarController.updateState(newState);
+                    updateStatusDisplay();
+                }
+            });
+            
+            // Функция обновления отображения статуса
+            function updateStatusDisplay() {
+                if (avatarController) {
+                    const state = avatarController.exportState();
+                    
+                    document.getElementById('level-display').textContent = state.level;
+                    document.getElementById('energy-display').textContent = state.energy;
+                    document.getElementById('mood-display').textContent = state.mood;
+                    document.getElementById('streak-display').textContent = state.streak;
+                    document.getElementById('achievements-display').textContent = state.achievements.length;
+                    
+                    // Обновляем значения слайдеров
+                    document.getElementById('energy-slider').value = state.energy;
+                    document.getElementById('energy-value').textContent = state.energy;
+                    
+                    document.getElementById('mood-slider').value = state.mood;
+                    document.getElementById('mood-value').textContent = state.mood;
+                    
+                    document.getElementById('level-slider').value = state.level;
+                    document.getElementById('level-value').textContent = state.level;
+                    
+                    document.getElementById('streak-slider').value = state.streak;
+                    document.getElementById('streak-value').textContent = state.streak;
+                }
+            }
+        });
+    </script>
+</body>
+</html> 

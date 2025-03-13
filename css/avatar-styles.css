@@ -1,0 +1,434 @@
+/* Стили для аватара */
+.avatar-section {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px 0;
+    margin: 0 15px 20px;
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+.avatar-container {
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin: 10px 0 20px;
+}
+
+.avatar-image {
+    width: auto;
+    height: 250px;
+    object-fit: contain;
+    border-radius: 0;
+    box-shadow: none;
+}
+
+/* Полностью удаляем ауру и анимации плавания */
+.avatar-aura {
+    display: none;
+}
+
+/* Стили для бейджей */
+.badges-container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: 0 20px;
+    margin-bottom: 10px;
+}
+
+.level-badge {
+    background: linear-gradient(135deg, #7C4DFF, #4A90E2);
+    color: white;
+    border-radius: 12px;
+    padding: 8px 16px;
+    font-weight: 600;
+    font-size: 1rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.3s ease;
+}
+
+.level-badge:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.currency-badge {
+    background: linear-gradient(135deg, #FFD700, #FFC107);
+    color: #2C3E50;
+    border-radius: 12px;
+    padding: 8px 16px;
+    font-weight: 700;
+    font-size: 1rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.3s ease;
+}
+
+.currency-badge:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.belt-badge {
+    background-color: #27AE60;
+    color: white;
+    border-radius: 20px;
+    padding: 6px 16px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.belt-badge:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Стили для таб-бара в стиле Apple Vision Pro */
+.tab-bar {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 20px;
+    margin: 10px;
+    padding: 10px 5px;
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 500px;
+    z-index: 100;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.tab-bar-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    transition: all 0.3s ease;
+    color: #8E8E93;
+    text-decoration: none;
+    width: 25%;
+    cursor: pointer;
+    border: none;
+    background: transparent;
+    outline: none;
+    position: relative;
+}
+
+.tab-bar-item i {
+    font-size: 1.4rem;
+    margin-bottom: 5px;
+    transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.tab-bar-item span {
+    font-size: 0.7rem;
+    font-weight: 500;
+    opacity: 0.8;
+    transition: opacity 0.3s ease;
+}
+
+.tab-bar-item:hover {
+    color: #7C4DFF;
+}
+
+.tab-bar-item:hover i {
+    transform: translateY(-2px);
+}
+
+.tab-bar-item.active {
+    color: #7C4DFF;
+}
+
+.tab-bar-item.active i {
+    transform: translateY(-2px);
+}
+
+.tab-bar-item.active span {
+    opacity: 1;
+}
+
+.tab-bar-item.active::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 5px;
+    height: 5px;
+    background-color: #7C4DFF;
+    border-radius: 50%;
+    opacity: 0.8;
+}
+
+/* Темная тема для таб-бара */
+@media (prefers-color-scheme: dark) {
+    .tab-bar {
+        background-color: rgba(30, 30, 30, 0.8);
+    }
+    
+    .tab-bar-item {
+        color: #8E8E93;
+    }
+    
+    .tab-bar-item.active {
+        color: #BB86FC;
+    }
+    
+    .tab-bar-item.active::after {
+        background-color: #BB86FC;
+    }
+}
+
+/* Адаптивность для мобильных устройств */
+@media (max-width: 480px) {
+    .tab-bar {
+        width: 95%;
+        padding: 8px 0;
+        bottom: 10px;
+    }
+    
+    .tab-bar-item {
+        padding: 8px 0;
+    }
+    
+    .tab-bar-item i {
+        font-size: 1.2rem;
+    }
+    
+    .tab-bar-item span {
+        font-size: 0.65rem;
+    }
+    
+    .avatar-image {
+        height: 200px;
+    }
+}
+
+/* Стили для статистики */
+.stats-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 20px;
+    padding: 0 15px;
+}
+
+.stat-card {
+    background-color: white;
+    border-radius: 16px;
+    padding: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.stat-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+.stat-card::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.1), transparent);
+    transform: translateX(-100%);
+    transition: transform 0.6s ease;
+}
+
+.stat-card:hover::after {
+    transform: translateX(100%);
+}
+
+.stat-title {
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: #6c757d;
+    margin-bottom: 6px;
+}
+
+.stat-value {
+    font-size: 1.2rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: #2C3E50;
+}
+
+.progress-bar {
+    height: 8px;
+    background-color: #f1f1f1;
+    border-radius: 4px;
+    overflow: hidden;
+    margin-top: 6px;
+}
+
+.progress {
+    height: 100%;
+    background: linear-gradient(90deg, #7C4DFF, #4A90E2);
+    border-radius: 4px;
+}
+
+.progress-value {
+    font-size: 0.7rem;
+    color: #6c757d;
+    text-align: right;
+    margin-top: 2px;
+}
+
+/* Кнопки действий */
+.action-buttons {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    margin-bottom: 20px;
+    padding: 0 15px;
+}
+
+.action-button {
+    background-color: #4A90E2;
+    color: white;
+    border: none;
+    border-radius: 16px;
+    padding: 12px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    letter-spacing: 0.3px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.06);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    height: 44px;
+    text-transform: uppercase;
+}
+
+.action-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.action-button.boost {
+    background: linear-gradient(135deg, #5B7CFA, #7C4DFF);
+}
+
+.action-button.success {
+    background: linear-gradient(135deg, #4CAF50, #2ECC71);
+}
+
+.action-button.danger {
+    background-color: #E74C3C;
+}
+
+.action-button.warning {
+    background-color: #F1C40F;
+    color: #2C3E50;
+}
+
+.action-button::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 5px;
+    height: 5px;
+    background: rgba(255, 255, 255, 0.5);
+    opacity: 0;
+    border-radius: 100%;
+    transform: scale(1, 1) translate(-50%, -50%);
+    transform-origin: 50% 50%;
+}
+
+.action-button:active::after {
+    opacity: 1;
+    transform: scale(50, 50) translate(-50%, -50%);
+    transition: transform 0.5s, opacity 1s;
+}
+
+/* Достижения */
+.achievements-container {
+    padding: 0 15px;
+    margin-bottom: 80px; /* Отступ снизу для таб-бара */
+}
+
+.section-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 12px;
+    color: #2C3E50;
+}
+
+.achievements-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(70px, 1fr));
+    gap: 12px;
+}
+
+.achievement-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.achievement-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #7C4DFF, #4A90E2);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 6px;
+    color: white;
+    font-size: 1.2rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.achievement-item:hover .achievement-icon {
+    transform: scale(1.1);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.achievement-name {
+    font-size: 0.75rem;
+    font-weight: 500;
+}
+
+.achievement-item.locked .achievement-icon {
+    background: linear-gradient(135deg, #95A5A6, #BDC3C7);
+    opacity: 0.7;
+}
+
+.achievement-item.locked .achievement-name {
+    color: #95A5A6;
+} 
