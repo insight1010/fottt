@@ -30,7 +30,7 @@
    - Создать репозиторий `fitchallenge` на GitHub
    - Загрузить код в репозиторий с помощью команд:
      ```
-     git remote add origin git@github.com:insight1010/fottt.git
+     git remote add origin https://github.com/insight1010/fottt.git
      git push -u origin main
      ```
 
