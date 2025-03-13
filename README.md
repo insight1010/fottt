@@ -25,7 +25,7 @@
 
 1. Клонируйте репозиторий:
 ```
-git clone https://github.com/insight1010/fitchallenge.git
+git clone https://github.com/insight1010/fottt.git
 ```
 
 2. Откройте `index.html` в браузере или используйте локальный сервер:

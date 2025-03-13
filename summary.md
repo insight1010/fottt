@@ -30,13 +30,13 @@
    - Создать репозиторий `fitchallenge` на GitHub
    - Загрузить код в репозиторий с помощью команд:
      ```
-     git remote add origin https://github.com/insight1010/fitchallenge.git
+     git remote add origin git@github.com:insight1010/fottt.git
      git push -u origin main
      ```
 
 2. **Настройка GitHub Pages**
    - Настроить GitHub Pages для репозитория
-   - Проверить доступность приложения по URL: `https://insight1010.github.io/fitchallenge/`
+   - Проверить доступность приложения по URL: `https://insight1010.github.io/fottt/`
 
 3. **Настройка Telegram Mini App**
    - Использовать BotFather для создания Mini App

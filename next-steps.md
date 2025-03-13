@@ -11,7 +11,7 @@
 7. После создания репозитория, GitHub покажет инструкции для загрузки существующего репозитория. Используйте следующие команды:
 
 ```bash
-git remote add origin https://github.com/insight1010/fitchallenge.git
+git remote add origin git@github.com:insight1010/fottt.git
 git push -u origin main
 ```
 
@@ -24,7 +24,7 @@ git push -u origin main
 3. В разделе "Source" выберите ветку "main" и папку "/ (root)"
 4. Нажмите "Save"
 5. Дождитесь завершения деплоя (обычно занимает несколько минут)
-6. Ваше приложение будет доступно по адресу: `https://insight1010.github.io/fitchallenge/`
+6. Ваше приложение будет доступно по адресу: `https://insight1010.github.io/fottt/`
 
 ## 3. Настройка Telegram Mini App
 
@@ -35,7 +35,7 @@ git push -u origin main
    - Введите название приложения: `FitChallenge`
    - Введите краткое описание: "Приложение для формирования фитнес-привычек и здорового образа жизни"
    - Загрузите иконку приложения (можно использовать любое изображение с фитнес-тематикой)
-   - Введите URL вашего приложения: `https://insight1010.github.io/fitchallenge/`
+   - Введите URL вашего приложения: `https://insight1010.github.io/fottt/`
 5. После завершения настройки BotFather предоставит вам ссылку на ваше Mini App
 
 ## 4. Тестирование приложения
